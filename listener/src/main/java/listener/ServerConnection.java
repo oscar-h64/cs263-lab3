@@ -31,7 +31,7 @@ public class ServerConnection implements Runnable {
 
             String inputLine;
             while ((inputLine = inFromServer.readLine()) != null) {
-                System.out.println("listener [from server]: " + inputLine);
+                System.out.println("[server->client]: " + inputLine);
                 if(this.outToClient != null) {
                     this.outToClient.println(inputLine);
                 }

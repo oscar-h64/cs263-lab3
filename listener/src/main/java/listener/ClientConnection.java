@@ -29,7 +29,7 @@ public class ClientConnection implements Runnable {
             // read messages and try to the pass them on to the actual server
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                System.out.println("listener [from client]: " + inputLine);
+                System.out.println("[client->server]: " + inputLine);
                 this.serverConnection.getOutToServer().println(inputLine);
             }
         }

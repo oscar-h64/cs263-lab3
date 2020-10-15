@@ -19,6 +19,5 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile 'commons-codec:commons-codec:1.8'
-    testCompile("junit:junit")
+    implementation 'commons-codec:commons-codec:1.8'
 }
