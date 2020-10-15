@@ -1,0 +1,45 @@
+version: '3.0'
+services:
+    cs263-lab3-server:
+        container_name: server
+        build: ./bin/server
+        image: cs263-lab3-server:latest
+        environment: 
+            # the port on which the server listens for connections
+            - SERVER_PORT=3000
+        expose:
+            - 3000
+        networks:
+            - cs263-lab3-network
+    cs263-lab3-listener:
+        container_name: listener
+        build:
+            context: ./listener/build/install/listener
+            dockerfile: ../../../Dockerfile
+        image: cs263-lab3-listener:latest
+        environment: 
+            # the host and port to which the listener tries to connect
+            - SERVER_HOST=server
+            - SERVER_PORT=3000
+            # the port on which the listener listens
+            - LISTENER_PORT=3001
+        networks:
+            - cs263-lab3-network
+        depends_on: 
+            - cs263-lab3-server
+    cs263-lab3-client:
+        container_name: client
+        build: ./bin/client
+        image: cs263-lab3-client:latest
+        environment: 
+            # the port to which the client tries to connect
+            - SERVER_HOST=listener
+            - SERVER_PORT=3001
+        networks:
+            - cs263-lab3-network
+        depends_on: 
+            - cs263-lab3-server
+            - cs263-lab3-listener
+
+networks:
+    cs263-lab3-network:
